@@ -1,0 +1,28 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: My App
+            description: This is an awesome app!
+            version: 1.0.0
+        paths:
+            /api/v1/hello:
+                post:
+                    tags: [ Hello ]
+                    requestBody:
+                        description: 'Pick up "hello" from string'
+                        content:
+                            application/json:
+                                schema:
+                                    $ref: '#/components/schemas/HelloRequest'
+        components:
+            schemas:
+                HelloRequest:
+                    required:
+                        - message
+                    properties:
+                        message:
+                            type: string
+                            example: "hello world"
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

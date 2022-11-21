@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: .
+    volumes:
+      - ./:/app
+      - /app/vendor
+      - /app/var/cache
+    image: php
+    ports:
+      - 8000:8000

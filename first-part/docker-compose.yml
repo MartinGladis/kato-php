@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  phpunit:
+    build:
+      context: .
+    image: php
+    volumes:
+      - ./:/app
+      - /app/vendor
