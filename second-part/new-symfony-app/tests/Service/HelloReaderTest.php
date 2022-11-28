@@ -7,17 +7,43 @@ use PHPUnit\Framework\TestCase;
 
 class HelloReaderTest extends TestCase
 {
-    public function test(): void
+
+    /**
+     * @test
+     * @dataProvider helloDataProvider
+     */
+    public function itShouldReturnHello($data): void
     {
         $reader = new HelloReader;
 
-        $hello = $reader->getHello("Hello world");
+        $hello = $reader->getHello($data);
         $this->assertNotNull($hello);
+    }
 
-        $hello = $reader->getHello("hello world");
-        $this->assertNotNull($hello);
+    /**
+     * @test
+     * @dataProvider notHelloDataProvider
+     */
+    public function itShouldNotReturnHello($data)
+    {
+        $reader = new HelloReader;
 
-        $hello = $reader->getHello("world");
+        $hello = $reader->getHello($data);
         $this->assertNull($hello);
+    }
+
+    public function helloDataProvider()
+    {
+        return [
+            "Uppercase hello" => ['Hello world'],
+            "Lovercase hello" => ['hello world']
+        ];
+    }
+
+    public function notHelloDataProvider()
+    {
+        return [
+            "world" => ["world"]
+        ];
     }
 }
